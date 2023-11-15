@@ -54,7 +54,7 @@ int main(void) {
      prefixes, trying to insert it again should return
      ALREADY_IN_TREE, and trying to insert some other root should
      return CONFLICTING_PATH. */
-  assert(BDT_insert("1root") == SUCCESS); 
+  assert(BDT_insert("1root") == SUCCESS);
   assert(BDT_insert("1root/2child/3grandchild") == SUCCESS);
   assert(BDT_contains("1root") == TRUE);
   assert(BDT_contains("1root/2child") == TRUE);

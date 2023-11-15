@@ -1,0 +1,45 @@
+/*-------------------------------------------------------------------*/
+/* nodeFT.h                                                          */
+/* Author: Hugh Peterson                                             */
+/*-------------------------------------------------------------------*/
+
+#ifndef NODE_INCLUDED
+#define NODE_INCLUDED
+
+#include <stddef.h>
+#include "a4def.h"
+#include "path.h"
+
+/* A Node_T is a node in a File Tree */
+typedef struct node *Node_T;
+
+/*
+  Creates a new directory node in the File Tree, with path oPPath and
+  parent oNParent. Returns an int SUCCESS status and sets *poNResult 
+  to be the new node if successful. Otherwise, sets *poNResult to NULL 
+  and returns status:
+  * MEMORY_ERROR if memory could not be allocated to complete request
+  * CONFLICTING_PATH if oNParent's path is not an ancestor of oPPath
+                 or if oNParent is a file
+  * NO_SUCH_PATH if oPPath is of depth 0
+                 or oNParent's path is not oPPath's direct parent
+                 or oNParent is NULL but oPPath is not of depth 1
+  * ALREADY_IN_TREE if oNParent already has a child with this path
+*/
+int Node_newDir(Path_T oPPath, Node_T oNParent, Node_T *poNResult);
+
+/*
+  Creates a new file node in the File Tree, with path oPPath, parent 
+  oNParent, and contents contents. Returns an int SUCCESS status and 
+  sets *poNResult to be the new node if successful. Otherwise, sets 
+  *poNResult to NULL and returns status:
+  * MEMORY_ERROR if memory could not be allocated to complete request
+  * CONFLICTING_PATH if oNParent's path is not an ancestor of oPPath
+                 or if oNParent is a file
+  * NO_SUCH_PATH if oPPath is of depth 0
+                 or oNParent's path is not oPPath's direct parent
+                 or oNParent is NULL but oPPath is not of depth 1
+  * ALREADY_IN_TREE if oNParent already has a child with this path
+*/
+int Node_newFile(Path_T oPPath, Node_T oNParent, const char *contents,
+                Node_T *poNResult);

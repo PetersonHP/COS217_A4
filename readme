@@ -2,12 +2,12 @@ Assignment 4 readme File
 
 ------------------------------------------------------------------------
 Student 1: What is your name?
-
+Hugh Peterson
 
 
 ------------------------------------------------------------------------
 Student 2: What is your name?
-
+N/A
 
 
 ------------------------------------------------------------------------
@@ -117,21 +117,67 @@ the error manifests itself or is "noticed" by the client.
 
       Executable         Function with the underlying error
 ===============================================================
-         ./bdtBad1        
+         ./bdtBad1        BDT_insert()
 ---------------------------------------------------------------
-         ./bdtBad2        
+         ./bdtBad2        BDT_freeSubtree()
 ---------------------------------------------------------------
-         ./bdtBad3        
+         ./bdtBad3        BDT_addChild()
 ---------------------------------------------------------------
-         ./bdtBad4        
+         ./bdtBad4        BDT_strlenAccumulate()
 ---------------------------------------------------------------
-         ./bdtBad5        
+         ./bdtBad5        BDT_findNode()
 ===============================================================
 
 ------------------------------------------------------------------------
 What are your critiques of the given DT implementations, as
 specified in Step 2.5?
 
+************************************************************************
+dt.h
+************************************************************************
+- No critiques here.
 
+************************************************************************
+nodeDT.h
+************************************************************************
+- It might be better for getParent() to behave more similarly to 
+  getChild(), given its similar name and comparable behavior. One idea 
+  is that getParent() could also store its result at the address of a 
+  pointer parameter called *poNResult and could return either SUCCESS
+  or NO_SUCH_PATH as an exit status int.
+
+************************************************************************
+dtGood.c
+************************************************************************
+- stdio.h is never used, so it should not be imported
+
+- DT_insert(), DT_contains(), DT_rm(), DT_init(), DT_destroy() should 
+  have function comments, even though there are already comments in the
+  .h file since comments would make it easier for someone who is 
+  actually debugging or working with the implementation.
+
+- It might be better to rename DT_destroy() to DT_free() so that it is 
+  more clear that the method actually frees the whole tree. This would 
+  also be more consistent with naming conventions across the other 
+  modules, where the method that does this is always in the format 
+  <MODULE NAME>_free().
+
+************************************************************************
+nodeDTGood.c
+************************************************************************
+- Node_free(), Node_getPath(), Node_hasChild(), Node_getNumChildren(), 
+  Node_getChild(), Node_getParent(), Node_compare(), and
+  Node_toString() should probably have function comments for the same
+  reason as mentioned in the critique of dtGood.c. In Node_toString(),
+  this is especially important, as the memory allocated belongs to the
+  client, who is then responsible for freeing it, so this should be
+  very clear.
+
+- Readability and comprehension could be improved if Node_new() was 
+  split up into two functions, using one to handle all of the
+  validation that occurs at the beginning of node creation and the
+  other to handle the actual creation and linking. This would be
+  easier to understand, as the two tasks are relatively different,
+  conceptually speaking.
 
 ------------------------------------------------------------------------
