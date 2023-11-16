@@ -107,6 +107,12 @@ int Node_compare(Node_T oNFirst, Node_T oNSecond);
 */
 char *Node_toString(Node_T oNNode);
 
+/* 
+  Returns TRUE if oNNode is a file node and FALSE if it is a 
+  directory node.
+*/
+boolean Node_isFile(Node_T oNNode);
+
 /*-------------------------------------------------------------------*/
 
 #endif
