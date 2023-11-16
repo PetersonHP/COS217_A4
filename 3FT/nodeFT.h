@@ -113,6 +113,14 @@ char *Node_toString(Node_T oNNode);
 */
 boolean Node_isFile(Node_T oNNode);
 
+/* 
+  If oNNode is a file node, returns its contents as a string.
+
+  Allocates mmory for the returned string, which is then owned by 
+  the caller!
+ */
+char *Node_getContents(Node_T oNNode);
+
 /*-------------------------------------------------------------------*/
 
 #endif
